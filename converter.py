@@ -36,8 +36,3 @@ def pdfs_to_single_png(pdf_path, output_path, dpi=300):
     print(f'Saved combined image to {output_path}')
     log = open("logs.txt", "a")
     log.write(f'\n{datetime.today()} - Saved combined image to {output_path}')
- 
-# Example usage
-# pdf_paths = ["multipage.pdf"]  # List of your PDF files
-# output_path = 'combined_image.png'  # Path to save the combined PNG file
-# pdfs_to_single_png(pdf_paths, output_path)
