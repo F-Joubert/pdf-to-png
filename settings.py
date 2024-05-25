@@ -15,8 +15,6 @@ log_move_events = True if config["LOGS"]["LOG_MOVE"] == "True" else False
 log_png_events = True if config["LOGS"]["LOG_PNG"] == "True" else False
 text_logs = True if config["LOGS"]["LOGS_TO_TEXT"] == "True" else False
 
-print(config["LOGS"]["LOG_CREATE"])
-
 # Delete Source
 should_delete = True if config["SETTINGS"]["DELETE_SOURCE_PDF"] == "True" else False
 

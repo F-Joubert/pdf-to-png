@@ -8,7 +8,6 @@ app_database = str
 # Modify database path if .exe
 if getattr(sys, "frozen", False):
     db_path = os.path.join(os.path.dirname(sys.executable), ".dbs")
-    print(f"Exec db path: {db_path}")
     app_database = os.path.join(db_path, "app_db.db")   
 elif __file__:
     db_path = os.path.join(os.path.dirname(__file__), ".dbs")
@@ -92,7 +91,7 @@ def write_logs_to_text(table: str, database=app_database):
 
         connection.commit()
         connection.close()
-        print(f"Created log text file")
+        print(f"Created log text file, toggle this in config.ini")
     except Exception as e:
         print(f"Logs to text file error: {e}")
         connection.close()

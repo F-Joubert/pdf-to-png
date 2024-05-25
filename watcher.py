@@ -71,6 +71,15 @@ if path == ".":
     elif __file__:
         path = os.path.dirname(__file__)
 
+startup_message = f"""
+    PDF to PNG Converter v1.3
+    -------------------------
+    Monitoring {path} for pdfs
+    Delete source .pdf files is {"ON" if settings_dict["Delete Source"] else "OFF"}
+"""
+
+print(startup_message)
+
 go_recursively = False # Whether to convert and potentially DELETE pdfs in child directories
 my_observer = Observer()
 my_observer.schedule(my_event_handler, path, recursive=go_recursively)
