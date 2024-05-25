@@ -80,7 +80,7 @@ if path == ".":
         path = os.path.dirname(__file__)
 
 startup_message = f"""
-    PDF to PNG Converter v1.3
+    PDF to PNG Converter v1.4
     -------------------------
     Monitoring {path} for pdfs
     Interval between pdf conversions: {sleep_timer} seconds
