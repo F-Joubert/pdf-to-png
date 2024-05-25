@@ -2,6 +2,8 @@ import fitz  # PyMuPDF
 from datetime import datetime
 from PIL import Image
 
+from db_functions import add_event_to_database_table
+from settings import settings_dict
  
 def pdfs_to_single_png(pdf_path, output_path, dpi=300):
     try:
@@ -23,7 +25,7 @@ def pdfs_to_single_png(pdf_path, output_path, dpi=300):
         total_height = sum(image.height for image in all_images)
     
         # Create a new blank image with the appropriate size
-        combined_image = Image.new('RGB', (max_width, total_height))
+        combined_image = Image.new("RGB", (max_width, total_height))
     
         # Paste each image into the combined image
         y_offset = 0
@@ -32,11 +34,11 @@ def pdfs_to_single_png(pdf_path, output_path, dpi=300):
             y_offset += image.height
     
         # Save the combined image as a PNG file
-        combined_image.save(output_path, 'PNG')
-        print(f'Saved combined image to {output_path}')
-        log = open("logs.txt", "a")
-        log.write(f'\n{datetime.today()} - Saved combined image to {output_path}')
+        combined_image.save(output_path, "PNG")
+        print(f"Saved combined image to {output_path}")
+        if settings_dict["Log PNG"]:
+            add_event_to_database_table(f"{datetime.today()}", "PNG", f"Saved combined image to {output_path}", "logs")
     except Exception as e:
         print(f"PDF Conversion error: {e}")
-        log = open("logs.txt", "a")
-        log.write(f'\n{datetime.today()} - Failed to Convert {pdf_path} - Error: {e}')
+        if settings_dict["Log Errors"]:
+            add_event_to_database_table(f"{datetime.today()}", "Error", f"Failed to Convert {pdf_path} - Error: {e}")

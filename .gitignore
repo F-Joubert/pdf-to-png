@@ -1,0 +1,7 @@
+.dbs
+.venv
+build/
+dist/
+logs.txt
+pdfconverter.spec
+__pycache__
