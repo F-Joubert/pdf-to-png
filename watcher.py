@@ -17,6 +17,9 @@ if __name__ == "__main__":
     ignore_directories = None
     case_sensitive = True
     my_event_handler = PatternMatchingEventHandler(patterns, ignore_patterns, ignore_directories, case_sensitive)
+    sleep_timer = settings_dict["Event Pause"]
+    if sleep_timer < 1:
+        sleep_timer = 1
 
     initialise_database()
     delete_events_from_database_table(settings_dict["Delete Date"], "logs")
@@ -41,19 +44,24 @@ def on_created(event):
 
 def on_deleted(event):
     try:
-        print(f"{event.src_path} has been deleted.")
+        if settings_dict["Log Deletes"]:
+            print(f"{event.src_path} has been deleted.")
     except Exception as e:
         print(f"Monitor delete event error: {e}")
 
 def on_modified(event):
     try:
-        print(f"{event.src_path} has been modified.")
+        if settings_dict["Log Modifies"]:
+            print(f"{event.src_path} has been modified.")
+            add_event_to_database_table(f"{datetime.today()}", "Modify", f"{event.src_path} has been modified.", "logs")
     except Exception as e:
         print(f"Monitor modify event error: {e}")
 
 def on_moved(event):
     try:
-        print(f"{event.src_path} has been moved to {event.dest_path}.")
+        if settings_dict["Log Moves"]:
+            print(f"{event.src_path} has been moved to {event.dest_path}.")
+            add_event_to_database_table(f"{datetime.today()}", "Modify", f"{event.src_path} has been moved to {event.dest_path}.", "logs")
     except Exception as e:
         print(f"Monitor move event error: {e}")
 
@@ -75,6 +83,7 @@ startup_message = f"""
     PDF to PNG Converter v1.3
     -------------------------
     Monitoring {path} for pdfs
+    Interval between pdf conversions: {sleep_timer} seconds
     Delete source .pdf files is {"ON" if settings_dict["Delete Source"] else "OFF"}
 """
 
@@ -91,7 +100,7 @@ if settings_dict["Text Logs"]:
 
 try:
     while True:
-        time.sleep(1)
+        time.sleep(sleep_timer)
 except KeyboardInterrupt:
     my_observer.stop()
     my_observer.join()

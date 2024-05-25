@@ -21,6 +21,13 @@ should_delete = True if config["SETTINGS"]["DELETE_SOURCE_PDF"] == "True" else F
 # Monitor Directory Location
 monitor_path = str(config["PATHS"]["MONITOR_DIRECTORY"])
 
+# Time between executing events
+try:
+    event_pause = int(config["SETTINGS"]["EVENT_PAUSE"])
+except Exception as e:
+    print(f"Event Pause config error: {e}\nDouble check you've used an integer value")
+    event_pause = 1
+
 settings_dict = {
     "Delete Date": logs_delete_date,
     "Log Creates": log_create_events,
@@ -30,6 +37,7 @@ settings_dict = {
     "Log Moves": log_move_events,
     "Log PNG": log_png_events,
     "Delete Source": should_delete,
+    "Event Pause": event_pause,
     "Monitor Path": monitor_path,
     "Text Logs": text_logs
 }
