@@ -34,6 +34,12 @@ except Exception as e:
     print(f"Log update interval config error: {e}\nDouble check you've used a numeric value")
     logs_update_interval = 300
 
+try:
+    retry_counter = int(config["SETTINGS"]["RETRY_COUNTER"])
+except Exception as e:
+    print(f"Retry counter config error: {e}\nDouble check you've used an interger value")
+    retry_counter = 3
+
 settings_dict = {
     "Delete Date": logs_delete_date,
     "Log Creates": log_create_events,
@@ -46,5 +52,6 @@ settings_dict = {
     "Delete Source": should_delete,
     "Event Pause": event_pause,
     "Monitor Path": monitor_path,
-    "Text Logs": text_logs
+    "Text Logs": text_logs,
+    "Retry Counter": retry_counter
 }
