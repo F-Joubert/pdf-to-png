@@ -31,9 +31,13 @@ def on_created(event):
         output_file = f"{abs_path[:abs_path.rfind(".")]}.png"
         
         version_counter = 1
-        while (os.path.exists(output_file)):
-            output_file = f"{output_file[:output_file.rfind(".")]}-{version_counter}.png"
-            version_counter += 1
+        
+        if os.path.exists(output_file):
+            temp_output_file = output_file
+            while (os.path.exists(temp_output_file)):
+                temp_output_file = f"{output_file[:output_file.rfind(".")]}-{version_counter}.png"
+                version_counter += 1
+            output_file = temp_output_file
 
         pdfs_to_single_png(pdf_path=abs_path, output_path=output_file)
 
