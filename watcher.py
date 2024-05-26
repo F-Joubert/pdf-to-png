@@ -93,7 +93,7 @@ def periodic_log_writer(interval):
         print(f"{datetime.today()} - Synced database to logs.txt")
 
 startup_message = f"""
-    PDF to PNG Converter v1.4
+    PDF to PNG Converter v1.5
     -------------------------
     Monitoring {path} for pdfs
     Interval between pdf conversions: {sleep_timer} seconds
