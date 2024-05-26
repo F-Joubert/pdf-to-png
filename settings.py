@@ -40,6 +40,12 @@ except Exception as e:
     print(f"Retry counter config error: {e}\nDouble check you've used an interger value")
     retry_counter = 3
 
+try:
+    retry_delay = int(config["SETTINGS"]["RETRY_DELAY"])
+except Exception as e:
+    print(f"Retry delay config error: {e}\nDouble check you've used an interger value")
+    retry_delay = 5
+
 settings_dict = {
     "Delete Date": logs_delete_date,
     "Log Creates": log_create_events,
@@ -53,5 +59,6 @@ settings_dict = {
     "Event Pause": event_pause,
     "Monitor Path": monitor_path,
     "Text Logs": text_logs,
-    "Retry Counter": retry_counter
+    "Retry Counter": retry_counter,
+    "Retry Delay": retry_delay
 }
