@@ -41,4 +41,4 @@ def pdfs_to_single_png(pdf_path, output_path, dpi=300):
     except Exception as e:
         print(f"PDF Conversion error: {e}")
         if settings_dict["Log Errors"]:
-            add_event_to_database_table(f"{datetime.today()}", "Error", f"Failed to Convert {pdf_path} - Error: {e}")
+            add_event_to_database_table(f"{datetime.today()}", "Error", f"Failed to Convert {pdf_path} - Error: {e}", "logs")
