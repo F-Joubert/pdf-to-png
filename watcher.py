@@ -77,7 +77,7 @@ my_event_handler.on_deleted = on_deleted
 my_event_handler.on_modified = on_modified
 my_event_handler.on_moved = on_moved
 
-path = settings_dict["Monitor Path"]
+path = fr"{settings_dict["Monitor Path"]}"
 
 # Modify relative path if .exe
 if path == ".":
