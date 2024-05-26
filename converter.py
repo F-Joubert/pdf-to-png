@@ -1,4 +1,5 @@
 import fitz
+import time
 from datetime import datetime
 from PIL import Image
 
@@ -41,6 +42,7 @@ def pdfs_to_single_png(pdf_path, output_path, dpi=300):
             print(f"Saved combined image to {output_path}")
             if settings_dict["Log PNG"]:
                 add_event_to_database_table(f"{datetime.today()}", "PNG", f"Saved combined image to {output_path}", "logs")
+            break
         except Exception as e:
             print(f"PDF Conversion error: {e}\nAttempting to remove DRM and try again.")
             if settings_dict["Log Errors"]:
@@ -49,4 +51,4 @@ def pdfs_to_single_png(pdf_path, output_path, dpi=300):
                 print(f"Retrying in {retry_delay} seconds...")
                 time.sleep(retry_delay)
             else:
-                print("All attempts to convert PDF failed.")
+                print(f"All attempts to convert PDF {pdf_path} failed.")

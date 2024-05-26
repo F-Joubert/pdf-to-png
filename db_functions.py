@@ -21,7 +21,6 @@ def initialise_database():
         create_database_or_database_table("logs")
     except Exception as e:
         print(f"Initialise database error: {e}")
-        connection.close()
 
 def create_database_dir(db_dir_path: str):
     try:
@@ -30,7 +29,6 @@ def create_database_dir(db_dir_path: str):
             print(f"Logs database directory created: {db_path}")
     except Exception as e:
         print(f"Create database directory error: {e}")
-        connection.close()
 
 def create_database_or_database_table(table_name: str, database_location=app_database):
     try:
