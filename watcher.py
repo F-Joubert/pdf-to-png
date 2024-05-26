@@ -93,8 +93,8 @@ def periodic_log_writer(interval):
         print(f"{datetime.today()} - Synced database to logs.txt")
 
 startup_message = fr"""
-    PDF to PNG Converter v1.5
-    -------------------------
+    PDF to PNG Converter v1.6
+    --------------------------
     Monitoring {path} for pdfs
     Interval between pdf conversions: {sleep_timer} seconds
     Delete source .pdf files is {"ON" if settings_dict["Delete Source"] else "OFF"}
