@@ -82,9 +82,9 @@ path = fr"{settings_dict["Monitor Path"]}"
 # Modify relative path if .exe
 if path == ".":
     if getattr(sys, "frozen", False):
-        path = os.path.dirname(sys.executable)
+        path = fr"{os.path.dirname(sys.executable)}"
     elif __file__:
-        path = os.path.dirname(__file__)
+        path = fr"{os.path.dirname(__file__)}"
 
 def periodic_log_writer(interval):
     while True:
