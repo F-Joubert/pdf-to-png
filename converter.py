@@ -44,7 +44,7 @@ def pdfs_to_single_png(pdf_path, output_path, dpi=300):
                 add_event_to_database_table(f"{datetime.today()}", "PNG", f"Saved combined image to {output_path}", "logs")
             break
         except Exception as e:
-            print(f"PDF Conversion error: {e}\nAttempting to remove DRM and try again.")
+            print(f"PDF Conversion error: {e}")
             if settings_dict["Log Errors"]:
                 add_event_to_database_table(f"{datetime.today()}", "Error", fr"Failed to Convert {pdf_path} - Error: {e}", "logs")
             if attempt < error_attempts - 1:
