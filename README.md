@@ -23,3 +23,5 @@ Make sure config.ini is in the same location as the app.
 - Set interval between file conversions
   - EVENT_PAUSE is the pause between each conversion in seconds, default is 1 second.
   - Might make the app more stable with many files, while making the overall process significantly slower.
+- Set how often to sync database to logs.txt
+  - LOGS_UPDATE_INTERVAL is the time between syncing in minutes, app will always sync on startup.
