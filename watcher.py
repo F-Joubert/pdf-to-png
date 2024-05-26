@@ -28,6 +28,12 @@ def on_created(event):
     try:
         abs_path = str(Path(__file__).parent / event.src_path)
         output_file = f"{abs_path[:abs_path.rfind(".")]}.png"
+        
+        version_counter = 1
+        while (os.path.exists(output_file)):
+            output_file = f"{output_file[:output_file.rfind(".")]}-{version_counter}.png"
+            version_counter += 1
+
         pdfs_to_single_png(pdf_path=abs_path, output_path=output_file)
 
         if settings_dict["Delete Source"]:
