@@ -28,6 +28,12 @@ except Exception as e:
     print(f"Event Pause config error: {e}\nDouble check you've used an integer value")
     event_pause = 1
 
+try:
+    logs_update_interval = float(config["LOGS"]["LOGS_UPDATE_INTERVAL"]) * 60
+except Exception as e:
+    print(f"Log update interval config error: {e}\nDouble check you've used a numeric value")
+    logs_update_interval = 300
+
 settings_dict = {
     "Delete Date": logs_delete_date,
     "Log Creates": log_create_events,
@@ -36,6 +42,7 @@ settings_dict = {
     "Log Modifies": log_modify_events,
     "Log Moves": log_move_events,
     "Log PNG": log_png_events,
+    "Log Interval": logs_update_interval,
     "Delete Source": should_delete,
     "Event Pause": event_pause,
     "Monitor Path": monitor_path,

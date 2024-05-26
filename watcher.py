@@ -1,5 +1,6 @@
 import os
 import sys
+import threading
 import time
 
 from datetime import datetime
@@ -85,6 +86,12 @@ if path == ".":
     elif __file__:
         path = os.path.dirname(__file__)
 
+def periodic_log_writer(interval):
+    while True:
+        time.sleep(interval)
+        write_logs_to_text("logs")
+        print(f"{datetime.today()} - Synced database to logs.txt")
+
 startup_message = f"""
     PDF to PNG Converter v1.4
     -------------------------
@@ -103,6 +110,11 @@ my_observer.start()
 
 if settings_dict["Text Logs"]:
     write_logs_to_text("logs")
+    print(f"Created log text file, toggle this in config.ini")
+    log_writer_interval = settings_dict["Log Interval"]
+    log_writer_thread = threading.Thread(target=periodic_log_writer, args=(log_writer_interval,))
+    log_writer_thread.daemon = True
+    log_writer_thread.start()
 
 try:
     while True:

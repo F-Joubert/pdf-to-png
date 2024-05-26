@@ -91,7 +91,6 @@ def write_logs_to_text(table: str, database=app_database):
 
         connection.commit()
         connection.close()
-        print(f"Created log text file, toggle this in config.ini")
     except Exception as e:
         print(f"Logs to text file error: {e}")
         connection.close()
